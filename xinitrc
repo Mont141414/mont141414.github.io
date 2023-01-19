@@ -1,0 +1,6 @@
+rm -R ~/.cache
+rm -R /root/.cache
+rm -R /var/cache
+rm -R /var/log
+pacman -Rns $(pacman -Qtdq)
+qtile start
