@@ -1,7 +1,0 @@
-# FIRST ONE -> DISABLED DESKTOP ENVIRONMENTS AND RELATED
-# SECOND ONE -> DISABLED SYSTEM AND SYSTEM SUPPORT RELATED
-# THIRD ONE -> NEEDS
-
-USE="-kde -gnome -xfce -wayland \
-     -systemd -ibm -bluetooth -ios -ipod -coreaudio \
-     x alsa pipewire pipewire-alsa dracut"
