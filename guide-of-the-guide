@@ -152,8 +152,9 @@ emerge --ask app-admin/sudo
 EDITOR=nano visudo
 
 
-// User
+// User and cleaning
 
+rm /stage3-*.tar.*
 useradd -m -G users,wheel,audio,cdrom,portage,usb,video -s /bin/bash mont
 passwd mont
 
