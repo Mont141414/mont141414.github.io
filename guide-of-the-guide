@@ -138,12 +138,12 @@ rc-update add chronyd default
 emerge --ask sys-fs/xfsprogs net-wireless/iw net-wireless/wpa_supplicant
 
 
-// GRUB stuff
+// EFI Boot stuff
 
-emerge --ask --verbose sys-boot/grub
-grub-install --efi-directory=/efi
-grub-mkconfig -o /boot/grub/grub.cfg
-
+emerge --ask sys-boot/efibootmgr
+mkdir -p /efi/efi/gentoo
+cp /boot/vmlinuz-*-dist /efi/efi/gentoo/bzImage.efi 
+efibootmgr --create --disk /dev/sda --part 1 --label "gentoo" --loader "\efi\gentoo\bzImage.efi"
 
 // Sudo (uncomment the wheel thing)
 
