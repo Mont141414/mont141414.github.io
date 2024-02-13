@@ -133,11 +133,9 @@ nano /etc/conf.d/keymaps
 
 // Tools and stuff
 
-emerge --ask app-admin/sysklogd
-rc-update add sysklogd default
 emerge --ask net-misc/chrony
 rc-update add chronyd default
-emerge --ask sys-fs/xfsprogs net-misc/dhcpcd net-wireless/iw net-wireless/wpa_supplicant
+emerge --ask sys-fs/xfsprogs net-wireless/iw net-wireless/wpa_supplicant
 
 
 // GRUB stuff
