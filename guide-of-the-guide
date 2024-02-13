@@ -111,7 +111,7 @@ emerge --ask sys-kernel/gentoo-kernel-bin
 // Network stuff
 
 echo mont > /etc/hostname
-emerge --ask net-misc/dhcpcd
+emerge --ask net-misc/dhcpcd net-wireless/iw net-wireless/wpa_supplicant
 rc-update add dhcpcd default 
 rc-service dhcpcd start 
 
@@ -131,11 +131,11 @@ passwd
 nano /etc/conf.d/keymaps
 
 
-// Tools and stuff
+// Clock sync + xfsprogs
 
 emerge --ask net-misc/chrony
 rc-update add chronyd default
-emerge --ask sys-fs/xfsprogs net-wireless/iw net-wireless/wpa_supplicant
+emerge --ask sys-fs/xfsprogs
 
 
 // EFI Boot stuff
@@ -145,11 +145,6 @@ mkdir -p /efi/efi/gentoo
 cp /boot/vmlinuz-*-dist /efi/efi/gentoo/bzImage.efi 
 efibootmgr --create --disk /dev/sda --part 1 --label "gentoo" --loader "\efi\gentoo\bzImage.efi"
 
-// Sudo (uncomment the wheel thing)
-
-emerge --ask app-admin/sudo
-EDITOR=nano visudo
-
 
 // User and cleaning
 
@@ -158,5 +153,11 @@ useradd -m -G users,wheel,audio,cdrom,portage,usb,video -s /bin/bash mont
 passwd mont
 
 
-// Tools and stuff (part 2)
+// Doas
+
+emerge --ask app-admin/doas
+echo "permit mont as root" > /etc/doas.conf 
+
+
+// Tools and stuff
 
