@@ -96,7 +96,8 @@ env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 // Kernel stuff (too lazy to make custom one)
 
 emerge --ask sys-kernel/installkernel
-emerge --ask sys-kernel/linux-firmware sys-kernel/gentoo-kernel-bin
+emerge --ask sys-kernel/linux-firmware
+emerge --ask sys-kernel/gentoo-kernel-bin
 
 
 // Fstab stuff (add this to /etc/fstab)
