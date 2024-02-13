@@ -164,7 +164,7 @@ echo "permit mont as root" > /etc/doas.conf
 
 emerge --ask app-editors/neovim
 eselect editor set /usr/bin/nvim
-emerge --ask --verbose --depclean app-editors/nano
+emerge --ask --depclean app-editors/nano
 
 
 // Curl
