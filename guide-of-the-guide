@@ -158,6 +158,15 @@ passwd mont
 emerge --ask app-admin/doas
 echo "permit mont as root" > /etc/doas.conf 
 
+================================================================================================
 
-// Tools and stuff
+// Neovim
 
+emerge --ask app-editors/neovim
+eselect editor set /usr/bin/nvim
+emerge --ask --verbose --depclean app-editors/nano
+
+
+// Curl
+
+emerge --ask net-misc/curl
