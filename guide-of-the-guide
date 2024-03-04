@@ -140,10 +140,7 @@ emerge --ask sys-fs/xfsprogs
 
 // EFI Boot stuff
 
-emerge --ask sys-boot/efibootmgr
-mkdir -p /efi/efi/gentoo
-cp /boot/vmlinuz-*-dist /efi/efi/gentoo/bzImage.efi 
-efibootmgr --create --disk /dev/sda --part 1 --label "gentoo" --loader "\efi\gentoo\bzImage.efi"
+https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Bootloader
 
 
 // User and cleaning
