@@ -63,13 +63,6 @@ emerge-webrsync
 eselect profile list
 
 
-// Maybe install the package binary host thing later, just add the following to /etc/portage/binrepos.conf/gentoo.conf
-
-[binhost]
-priority = 9999
-sync-uri = https://gentoo.c3sl.ufpr.br/releases/amd64/binpackages/17.1/x86-64/
-
-
 // Now update @world set!
 
 emerge --ask --verbose --update --deep --newuse @world
