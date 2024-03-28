@@ -36,7 +36,10 @@
 					<pre>wget <span class="main__highlighttext">[gentoo-stage-file-link]</span></pre>
 					<pre>tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner</pre>
 				</div>
-				<h3 class="main__name">IV - Add the custom make.conf at mont141414.github.io</h3>
+				<h3 class="main__name">IV - Add the custom make.conf</h3>
+				<div class="main__block">
+					<pre>wget -P etc/portage/ https://raw.githubusercontent.com/Mont141414/mont141414.github.io/main/make.conf</pre>
+				</div>
 				<h3 class="main__name">V - Chrooting</h3>
 				<div class="main__block">
 					<pre>cp --dereference /etc/resolv.conf /mnt/gentoo/etc/</pre>
