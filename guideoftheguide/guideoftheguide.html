@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Guide of the Guide</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<header class="header">
+			<h1 class="header__name">Guide of the Guide</h1>
+			<h2 class="header__name">Gentoo guide simplified</h2>
+			<hr class="header__divider" />
+		</header>
+		<main class="main">
+			<div class="main__content">
+				<h3 class="main__name">I - Starting with partitioning</h3>
+				<div class="main__noncodeblock">
+					<pre>SDA1    /efi    vfat      type = 1</pre>
+					<pre>SDA2    -       swap      type = 19</pre>
+					<pre>SDA3    /       xfs       type = 23</pre>
+				</div>
+				<h3 class="main__name">II - Commands to do after partitioning</h3>
+				<div class="main__block">
+					<pre>mkfs.vfat -F 32 /dev/sda1</pre>
+					<pre>mkfs.xfs /dev/sda3</pre>
+					<pre>mkswap /dev/sda2</pre>
+					<pre>swapon /dev/sda2</pre>
+					<pre>mkdir --parents /mnt/gentoo</pre>
+					<pre>mount /dev/sda3 /mnt/gentoo</pre>
+				</div>
+				<h3 class="main__name">III - Stage tarball stuff</h3>
+				<div class="main__block">
+					<pre>date <span class="main__highlighttext">[monthdayhourminuteyear]</span></pre>
+					<pre>cd /mnt/gentoo</pre>
+					<pre>wget <span class="main__highlighttext">[gentoo-stage-file-link]</span></pre>
+					<pre>tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner</pre>
+				</div>
+				<h3 class="main__name">IV - Add the custom make.conf at mont141414.github.io</h3>
+				<h3 class="main__name">V - Chrooting</h3>
+				<div class="main__block">
+					<pre>cp --dereference /etc/resolv.conf /mnt/gentoo/etc/</pre>
+					<pre>mount --types proc /proc /mnt/gentoo/proc</pre>
+					<pre>mount --rbind /sys /mnt/gentoo/sys</pre>
+					<pre>mount --make-rslave /mnt/gentoo/sys</pre>
+					<pre>mount --rbind /dev /mnt/gentoo/dev</pre>
+					<pre>mount --make-rslave /mnt/gentoo/dev</pre>
+					<pre>mount --bind /run /mnt/gentoo/run</pre>
+					<pre>mount --make-slave /mnt/gentoo/run</pre>
+					<pre>test -L /dev/shm && rm /dev/shm && mkdir /dev/shm</pre>
+					<pre>mount --types tmpfs --options nosuid,nodev,noexec shm /dev/shm</pre>
+					<pre>chmod 1777 /dev/shm /run/shm</pre>
+					<pre>chroot /mnt/gentoo /bin/bash</pre>
+					<pre>source /etc/profile</pre>
+					<pre>export PS1="(chroot) ${PS1}"</pre>
+				</div>
+				<h3 class="main__name">VI - Prepare bootloader</h3>
+				<div class="main__block">
+					<pre>mkdir /efi</pre>
+					<pre>mount /dev/sda1 /efi</pre>
+				</div>
+				<h3 class="main__name">VII - Configure portage</h3>
+				<div class="main__block">
+					<pre>mkdir --parents /etc/portage/repos.conf</pre>
+					<pre>cp /usr/share/portage/config/repos.conf /etc/portage/repos.conf/gentoo.conf</pre>
+					<pre>emerge-webrsync</pre>
+				</div>
+				<h3 class="main__name">VIII - Verify profile and then update @world</h3>
+				<div class="main__block">
+					<pre>eselect profile list</pre>
+					<pre>emerge --ask --verbose --update --deep --newuse @world</pre>
+				</div>
+				<h3 class="main__name">IX - Change timezone</h3>
+				<div class="main__block">
+					<pre>echo "Brazil/East" > /etc/timezone</pre>
+				</div>
+				<h3 class="main__name">X - Modify locale (just add the US one)</h3>
+				<div class="main__block">
+					<pre>nano /etc/locale.gen</pre>
+				</div>
+				<h3 class="main__name">XI - Generate and select locale</h3>
+				<div class="main__block">
+					<pre>locale-gen</pre>
+					<pre>eselect locale list</pre>
+					<pre>eselect locale set <span class="main__highlighttext">[number]</span></pre>
+				</div>
+				<h3 class="main__name">XII - Reload environment</h3>
+				<div class="main__block">
+					<pre>env-update && source /etc/profile && export PS1="(chroot) ${PS1}"</pre>
+				</div>
+				<h3 class="main__name">XIII - Install the kernel</h3>
+				<div class="main__block">
+					<pre>emerge --ask sys-kernel/installkernel</pre>
+					<pre>emerge --ask sys-kernel/linux-firmware</pre>
+					<pre>emerge --ask sys-kernel/gentoo-kernel-bin</pre>
+				</div>
+				<h3 class="main__name">XIV - Add this to /etc/fstab</h3>
+				<div class="main__noncodeblock">
+					<pre>/dev/sda1	/efi	vfat	defaults	0 2</pre>
+					<pre>/dev/sda2	none	swap	sw	0 0</pre>
+					<pre>/dev/sda3	/	xfs	defaults,noatime	0 1</pre>
+					<pre>/dev/cdrom	/mnt/cdrom	auto	noauto,user	0 0</pre>
+				</div>
+				<h3 class="main__name">XV - Network stuff</h3>
+				<div class="main__block">
+					<pre>echo mont > /etc/hostname</pre>
+					<pre>emerge --ask net-misc/dhcpcd net-wireless/iw net-wireless/wpa_supplicant</pre>
+					<pre>rc-update add dhcpcd default</pre>
+					<pre>rc-service dhcpcd start</pre>
+				</div>
+				<h3 class="main__name">XVI - Add the host here</h3>
+				<div class="main__block">
+					<pre>nano /etc/hosts</pre>
+				</div>
+				<h3 class="main__name">XVII - Root password</h3>
+				<div class="main__block">
+					<pre>passwd</pre>
+				</div>
+				<h3 class="main__name">XVIII - Set keymap to br-abnt2 (keyboard layout I use)</h3>
+				<div class="main__block">
+					<pre>nano /etc/conf.d/keymaps</pre>
+				</div>
+				<h3 class="main__name">XIX - Clock sync</h3>
+				<div class="main__block">
+					<pre>emerge --ask net-misc/chrony</pre>
+					<pre>rc-update add chronyd default</pre>
+				</div>
+				<h3 class="main__name">XX - Installing the bootloader</h3>
+				<div class="main__block">
+					<pre>nano /etc/conf.d/keymaps</pre>
+				</div>
+				<h3 class="main__name">XXI - Creating user and cleaning up the mess</h3>
+				<div class="main__block">
+					<pre>rm /stage3-*.tar.*</pre>
+					<pre>useradd -m -G users,wheel,audio,cdrom,portage,usb,video -s /bin/bash mont</pre>
+					<pre>passwd mont</pre>
+				</div>
+				<h3 class="main__name">XXII - Installing Doas</h3>
+				<div class="main__block">
+					<pre>emerge --ask app-admin/doas</pre>
+					<pre>echo "permit mont as root" > /etc/doas.conf</pre>
+				</div>
+				<h3 class="main__name">XXIII - Installing Neovim as default text editor</h3>
+				<div class="main__block">
+					<pre>emerge --ask app-editors/neovim</pre>
+					<pre>eselect editor set /usr/bin/nvim</pre>
+					<pre>emerge --ask --depclean app-editors/nano</pre>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>
