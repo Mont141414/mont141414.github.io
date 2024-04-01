@@ -133,15 +133,20 @@
 					<pre>refind-install</pre>
 					<pre>mount -o remount,rw -t efivarfs efivarfs /sys/firmware/efi/efivars</pre>
 				</div>
+				<h3 class="main__name">23 - Changing shell</h3>
+				<div class="main__block">
+					<pre>emerge --ask app-shells/dash</pre>
+					<pre>echo "app-alternatives/sh -bash dash" >> /etc/portage/package.use/sh</pre>
+				</div>
 				<h3 class="main__name">21 - Creating user and cleaning up the mess</h3>
 				<div class="main__block">
 					<pre>rm /stage3-*.tar.*</pre>
-					<pre>useradd -m -G users,wheel,audio,cdrom,portage,usb,video -s /bin/bash mont</pre>
+					<pre>useradd -m -G users,wheel,audio,cdrom,portage,usb,video -s /bin/dash mont</pre>
 					<pre>passwd mont</pre>
 				</div>
 				<h3 class="main__name">22 - Installing extra packages</h3>
 				<div class="main__block">
-					<pre>emerge --ask app-shells/dash app-admin/doas app-editors/neovim gui-wm/hyprland</pre>
+					<pre>emerge --ask app-admin/doas app-editors/neovim gui-wm/hyprland</pre>
 				</div>
 				<h3 class="main__name">23 - Configuring Doas</h3>
 				<div class="main__block">
