@@ -38,7 +38,7 @@
 				</div>
 				<h3 class="main__name">4 - Set the make.conf</h3>
 				<div class="main__block">
-					<pre>wget -P etc/portage/ https://raw.githubusercontent.com/Mont141414/mont141414.github.io/main/make.conf</pre>
+					<pre>wget -P etc/portage/ https://raw.githubusercontent.com/Mont141414/mont141414.github.io/main/files/make.conf</pre>
 				</div>
 				<h3 class="main__name">5 - Mounting and changing root directory</h3>
 				<div class="main__block">
@@ -146,7 +146,8 @@
 				</div>
 				<h3 class="main__name">23 - Installing extra packages</h3>
 				<div class="main__block">
-					<pre>emerge --ask app-admin/doas app-editors/neovim gui-wm/hyprland</pre>
+					<pre>emerge --ask app-admin/doas app-editors/neovim</pre>
+					<pre>emerge --ask x11-base/xorg-server x11-apps/xinit x11-terms/kitty x11</pre>
 				</div>
 				<h3 class="main__name">24 - Configuring Doas</h3>
 				<div class="main__block">
@@ -156,6 +157,11 @@
 				<div class="main__block">
 					<pre>eselect editor set /usr/bin/nvim</pre>
 					<pre>emerge --ask --depclean app-editors/nano</pre>
+				</div>
+				<h3 class="main__name">26 - Configuring the window manager</h3>
+				<div class="main__block">
+					<pre></pre>
+					<pre></pre>
 				</div>
 			</div>
 		</main>
