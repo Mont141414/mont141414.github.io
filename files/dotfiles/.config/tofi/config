@@ -8,11 +8,11 @@ hint-font = false
 # Text theming
 
 text-color = #F1F2E1
-prompt-color = #F1F2E1
+prompt-color = #E6BC0D
 prompt-background = #00000000
 prompt-background-padding = 0
 prompt-background-corner-radius = 0
-placeholder-color = #F1F2E1A8
+placeholder-color = #EDF37B
 placeholder-background = #00000000
 placeholder-background-padding = 0
 placeholder-background-corner-radius = 0
@@ -37,19 +37,17 @@ selection-match-color = #00000000
 
 # Text cursor theme
 
-text-cursor-style = bar
-text-cursor-color = #F1F2E1
+text-cursor-style = underscore
+text-cursor-color = #EDF37B
 text-cursor-background = #000000
 text-cursor-corner-radius = 0
-text-cursor-style = underscore, or to 2 otherwise.
-text-cursor-thickness = 2
 
 
 # Text layout
 
-prompt-text = ">> "
+prompt-text = "  🭬"
 prompt-padding = 0
-placeholder-text = ""
+placeholder-text = "Search..."
 num-results = 0
 result-spacing = 0
 horizontal = false
@@ -87,8 +85,8 @@ margin-right = 0
 
 # Behaviour
 
-hide-cursor = true
-text-cursor = false
+hide-cursor = false
+text-cursor = true
 history = false
 matching-algorithm = normal
 require-match = true
