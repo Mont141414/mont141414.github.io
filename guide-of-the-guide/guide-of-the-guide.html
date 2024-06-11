@@ -144,14 +144,18 @@
 					<pre>useradd -m -G users,wheel,audio,cdrom,portage,usb,video -s /bin/zsh mont</pre>
 					<pre>passwd mont</pre>
 				</div>
-				<h3 class="main__name">23 - Installing extra packages</h3>
+				<h3 class="main__name">23 - Enabling GURU</h3>
 				<div class="main__block">
 					<pre>emerge --ask app-eselect/eselect-repository</pre>
-					<pre>eselect repository enable wayland-desktop</pre>
-					<pre>emaint sync --repo wayland-desktop</pre>
-					<pre>echo "*/*::wayland-desktop ~amd64" > /etc/portage/package.accept_keywords/wayland-desktop</pre>
+					<pre>eselect repository enable guru</pre>
+					<pre>emerge --sync guru</pre>
+					<pre>echo "*/*::guru ~amd64" > /etc/portage/package.accept_keywords/guru</pre>
+				</div>
+				<h3 class="main__name">23 - Installing extra packages</h3>
+				<div class="main__block">
+					<pre></pre>
 					<pre>emerge --ask app-admin/doas app-editors/neovim dev-vcs/git app-misc/fastfetch</pre>
-					<pre>emerge --ask x11-misc/rofi x11-terms/kitty gui-wm/hyprland gui-apps/hyprshot gui-apps/swaybg</pre>
+					<pre>emerge --ask x11-terms/kitty gui-wm/hyprland gui-apps/swaybg gui-apps/tofi gui-apps/grim gui-apps/slurp</pre>
 				</div>
 				<h3 class="main__name">24 - Configuring Doas</h3>
 				<div class="main__block">
