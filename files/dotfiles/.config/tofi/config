@@ -1,6 +1,6 @@
 # Fonts
 
-font = "Sans"
+font = "Monospace"
 font-size = 16
 hint-font = false
 
