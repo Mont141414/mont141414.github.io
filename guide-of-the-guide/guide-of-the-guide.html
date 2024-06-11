@@ -151,23 +151,23 @@
 					<pre>emerge --sync --all</pre>
 					<pre>echo "*/*::guru ~amd64" > /etc/portage/package.accept_keywords/guru</pre>
 				</div>
-				<h3 class="main__name">23 - Installing extra packages</h3>
+				<h3 class="main__name">24 - Installing extra packages</h3>
 				<div class="main__block">
 					<pre></pre>
 					<pre>emerge --ask app-admin/doas app-editors/neovim dev-vcs/git app-misc/fastfetch</pre>
 					<pre>emerge --ask x11-terms/kitty gui-wm/hyprland gui-apps/tofi</pre>
 					<pre>emerge --ask gui-apps/swaybg gui-apps/grim gui-apps/slurp gui-apps/wl-clipboard</pre>
 				</div>
-				<h3 class="main__name">24 - Configuring Doas</h3>
+				<h3 class="main__name">25 - Configuring Doas</h3>
 				<div class="main__block">
 					<pre>echo "permit mont as root" > /etc/doas.conf</pre>
 				</div>
-				<h3 class="main__name">25 - Setting Neovim as default text editor</h3>
+				<h3 class="main__name">26 - Setting Neovim as default text editor</h3>
 				<div class="main__block">
 					<pre>eselect editor set /usr/bin/nvim</pre>
 					<pre>emerge --ask --depclean app-editors/nano</pre>
 				</div>
-				<h3 class="main__name">26 - Installing dotfiles</h3>
+				<h3 class="main__name">27 - Installing dotfiles</h3>
 				<div class="main__block">
 					<pre>git clone https://github.com/Mont141414/mont141414.github.io.git mont141414</pre>
 					<pre>cp -rv mont141414/files/dotfiles/.* ~ && rm -rvf mont141414</pre>
