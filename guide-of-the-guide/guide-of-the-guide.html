@@ -146,6 +146,7 @@
 				</div>
 				<h3 class="main__name">23 - Installing extra packages</h3>
 				<div class="main__block">
+					<pre>emerge --ask app-eselect/eselect-repository</pre>
 					<pre>eselect repository enable wayland-desktop</pre>
 					<pre>emaint sync --repo wayland-desktop</pre>
 					<pre>echo "*/*::wayland-desktop ~amd64" > /etc/portage/package.accept_keywords/wayland-desktop</pre>
