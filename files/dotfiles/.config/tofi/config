@@ -45,7 +45,7 @@ text-cursor-corner-radius = 0
 
 # Text layout
 
-prompt-text = ">> "
+prompt-text = "🯇 "
 prompt-padding = 0
 placeholder-text = "Search..."
 num-results = 0
