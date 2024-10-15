@@ -5,7 +5,7 @@ font-size = 16
 hint-font = false
 
 
-# Text theming
+# Text Theming
 
 text-color = #F1F2E1
 prompt-color = #E6BC0D
@@ -35,7 +35,7 @@ selection-background-corner-radius = 0
 selection-match-color = #00000000
 
 
-# Text cursor theme
+# Text Cursor Theme
 
 text-cursor-style = underscore
 text-cursor-color = #EDF37B
@@ -43,7 +43,7 @@ text-cursor-background = #000000
 text-cursor-corner-radius = 0
 
 
-# Text layout
+# Text Layout
 
 prompt-text = "🯇 "
 prompt-padding = 0
@@ -54,7 +54,7 @@ horizontal = false
 min-input-width = 0
 
 
-# Window theming
+# Window Theming
 
 width = 720
 height = 720
@@ -72,7 +72,7 @@ clip-to-padding = true
 scale = true
 
 
-# Window positioning
+# Window Positioning
 
 output = ""
 anchor = center
@@ -96,7 +96,7 @@ hidden-character = "*"
 physical-keybindings = true
 print-index = false
 drun-launch = false
-terminal = kitty
+terminal = alacritty
 late-keyboard-init = false
 multi-instance = false
 ascii-input = false
