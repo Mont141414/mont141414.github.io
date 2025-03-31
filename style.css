@@ -37,17 +37,31 @@ body {
 	min-width: 100%;
 }
 
-.main__button {
-	background-color: black;
-	font-size: 16px;
+.main__name{
+	padding: 50px 0 20px;
+}
+
+.main__noncodeblock {
+	max-width: 70%;
+	background-color: midnightblue;
+	margin: 0px auto;
 	padding: 20px 20px;
-	margin: 20px auto;
-	display: grid;
+	text-align: left;
 	border-radius: 12px;
 }
 
-.main__button:hover {
-	background-color: midnightblue;
+.main__block {
+	max-width: 70%;
+	background-color: darkslategray;
+	margin: 0px auto;
+	padding: 20px 20px;
+	text-align: left;
+	border-radius: 12px;
+}
+
+.main__highlighttext {
+	color: cyan;
+	font-weight: bold;
 }
 
 .footer {
@@ -63,4 +77,17 @@ body {
 .footer__divider {
 	margin-top: 40px;
 	margin-bottom: 40px;
+}
+
+.main__button {
+	background-color: black;
+	font-size: 16px;
+	padding: 20px 20px;
+	margin: 20px auto;
+	display: grid;
+	border-radius: 12px;
+}
+
+.main__button:hover {
+	background-color: midnightblue;
 }
