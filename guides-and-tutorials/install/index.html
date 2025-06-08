@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Guide of the Guide</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body>
+		<header class="header">
+			<h1 class="header__name">Guide of the Guide</h1>
+			<h2 class="header__name">Gentoo guide simplified</h2>
+			<hr class="header__divider" />
+		</header>
+		<main class="main">
+			<div class="main__content">
+				<h3 class="main__name">1 - Partitioning</h3>
+				<div class="main__noncodeblock">
+					<pre>SDA1    /efi    vfat      type = 1</pre>
+					<pre>SDA2    -       swap      type = 19</pre>
+					<pre>SDA3    /       xfs       type = 23</pre>
+				</div>
+				<h3 class="main__name">2 - Format partitions</h3>
+				<div class="main__block">
+					<pre>mkfs.vfat -F 32 /dev/sda1</pre>
+					<pre>mkfs.xfs /dev/sda3</pre>
+					<pre>mkswap /dev/sda2</pre>
+					<pre>swapon /dev/sda2</pre>
+					<pre>mkdir --parents /mnt/gentoo</pre>
+					<pre>mount /dev/sda3 /mnt/gentoo</pre>
+				</div>
+				<h3 class="main__name">3 - Extract stage tarball</h3>
+				<div class="main__block">
+					<pre>date <span class="main__highlighttext">[monthdayhourminuteyear]</span></pre>
+					<pre>cd /mnt/gentoo</pre>
+					<pre>wget <span class="main__highlighttext">[gentoo-stage-file-link]</span></pre>
+					<pre>tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner</pre>
+				</div>
+				<h3 class="main__name">4 - Set the make.conf</h3>
+				<div class="main__block">
+					<pre>wget -P etc/portage/ https://raw.githubusercontent.com/Mont141414/mont141414.github.io/main/files/make.conf</pre>
+				</div>
+				<h3 class="main__name">5 - Mounting and changing root directory</h3>
+				<div class="main__block">
+					<pre>cp --dereference /etc/resolv.conf /mnt/gentoo/etc/</pre>
+					<pre>mount --types proc /proc /mnt/gentoo/proc</pre>
+					<pre>mount --rbind /sys /mnt/gentoo/sys</pre>
+					<pre>mount --make-rslave /mnt/gentoo/sys</pre>
+					<pre>mount --rbind /dev /mnt/gentoo/dev</pre>
+					<pre>mount --make-rslave /mnt/gentoo/dev</pre>
+					<pre>mount --bind /run /mnt/gentoo/run</pre>
+					<pre>mount --make-slave /mnt/gentoo/run</pre>
+					<pre>test -L /dev/shm && rm /dev/shm && mkdir /dev/shm</pre>
+					<pre>mount --types tmpfs --options nosuid,nodev,noexec shm /dev/shm</pre>
+					<pre>chmod 1777 /dev/shm /run/shm</pre>
+					<pre>chroot /mnt/gentoo /bin/bash</pre>
+					<pre>source /etc/profile</pre>
+					<pre>export PS1="(chroot) ${PS1}"</pre>
+				</div>
+				<h3 class="main__name">6 - Mounting bootloader partition</h3>
+				<div class="main__block">
+					<pre>mkdir /efi</pre>
+					<pre>mount /dev/sda1 /efi</pre>
+				</div>
+				<h3 class="main__name">7 - Configuring portage</h3>
+				<div class="main__block">
+					<pre>mkdir --parents /etc/portage/repos.conf</pre>
+					<pre>cp /usr/share/portage/config/repos.conf /etc/portage/repos.conf/gentoo.conf</pre>
+					<pre>emerge-webrsync</pre>
+				</div>
+				<h3 class="main__name">8 - Updating @world set</h3>
+				<div class="main__block">
+					<pre>emerge --ask --verbose --update --deep --newuse @world</pre>
+				</div>
+				<h3 class="main__name">9 - Changing timezone</h3>
+				<div class="main__block">
+					<pre>echo "Brazil/East" > /etc/timezone</pre>
+				</div>
+				<h3 class="main__name">10 - Modifying locale (just add the US one)</h3>
+				<div class="main__block">
+					<pre>nano /etc/locale.gen</pre>
+				</div>
+				<h3 class="main__name">11 - Generating and selecting the locale</h3>
+				<div class="main__block">
+					<pre>locale-gen</pre>
+					<pre>eselect locale list</pre>
+					<pre>eselect locale set <span class="main__highlighttext">[number]</span></pre>
+				</div>
+				<h3 class="main__name">12 - Reloading environment</h3>
+				<div class="main__block">
+					<pre>env-update && source /etc/profile && export PS1="(chroot) ${PS1}"</pre>
+				</div>
+				<h3 class="main__name">13 - Installing the kernel</h3>
+				<div class="main__block">
+					<pre>emerge --ask sys-kernel/installkernel</pre>
+					<pre>emerge --ask sys-kernel/linux-firmware</pre>
+					<pre>emerge --ask sys-kernel/gentoo-kernel-bin</pre>
+				</div>
+				<h3 class="main__name">14 - Making the fstab at /etc/fstab</h3>
+				<div class="main__noncodeblock">
+					<pre>/dev/sda1	/efi	vfat	defaults	0 2</pre>
+					<pre>/dev/sda2	none	swap	sw	0 0</pre>
+					<pre>/dev/sda3	/	xfs	defaults,noatime	0 1</pre>
+					<pre>/dev/cdrom	/mnt/cdrom	auto	noauto,user	0 0</pre>
+				</div>
+				<h3 class="main__name">15 - Setting up network</h3>
+				<div class="main__block">
+					<pre>echo mont > /etc/hostname</pre>
+					<pre>emerge --ask net-misc/dhcpcd net-wireless/iw net-wireless/wpa_supplicant</pre>
+					<pre>rc-update add dhcpcd default</pre>
+					<pre>rc-service dhcpcd start</pre>
+				</div>
+				<h3 class="main__name">16 - Adding the host (mont)</h3>
+				<div class="main__block">
+					<pre>nano /etc/hosts</pre>
+				</div>
+				<h3 class="main__name">17 - Setting the root password</h3>
+				<div class="main__block">
+					<pre>passwd</pre>
+				</div>
+				<h3 class="main__name">18 - Setting keymaps (in this case, br-abnt2)</h3>
+				<div class="main__block">
+					<pre>nano /etc/conf.d/keymaps</pre>
+				</div>
+				<h3 class="main__name">19 - Setting up clock syncing software</h3>
+				<div class="main__block">
+					<pre>emerge --ask net-misc/chrony</pre>
+					<pre>rc-update add chronyd default</pre>
+				</div>
+				<h3 class="main__name">20 - Setting up the bootloader</h3>
+				<div class="main__block">
+					<pre>emerge --ask sys-boot/refind</pre>
+					<pre>refind-install</pre>
+					<pre>mount -o remount,rw -t efivarfs efivarfs /sys/firmware/efi/efivars</pre>
+				</div>
+				<h3 class="main__name">21 - Changing shell</h3>
+				<div class="main__block">
+					<pre>emerge --ask app-shells/dash app-shells/zsh</pre>
+					<pre>echo "app-alternatives/sh -bash dash" >> /etc/portage/package.use/sh</pre>
+				</div>
+				<h3 class="main__name">22 - Creating user and cleaning up the mess</h3>
+				<div class="main__block">
+					<pre>rm /stage3-*.tar.*</pre>
+					<pre>useradd -m -G users,wheel,audio,cdrom,portage,usb,video -s /bin/zsh mont</pre>
+					<pre>passwd mont</pre>
+				</div>
+				<h3 class="main__name">23 - Enabling GURU</h3>
+				<div class="main__block">
+					<pre>emerge --ask app-eselect/eselect-repository</pre>
+					<pre>eselect repository enable 158</pre>
+					<pre>emerge --sync --all</pre>
+					<pre>echo "*/*::guru ~amd64" > /etc/portage/package.accept_keywords/guru</pre>
+				</div>
+				<h3 class="main__name">24 - Installing extra packages</h3>
+				<div class="main__block">
+					<pre></pre>
+					<pre>emerge --ask app-admin/doas app-editors/neovim dev-vcs/git app-misc/fastfetch</pre>
+					<pre>emerge --ask x11-terms/kitty gui-wm/hyprland gui-apps/tofi</pre>
+					<pre>emerge --ask gui-apps/swaybg gui-apps/grim gui-apps/slurp gui-apps/wl-clipboard</pre>
+				</div>
+				<h3 class="main__name">25 - Configuring Doas</h3>
+				<div class="main__block">
+					<pre>echo "permit mont as root" > /etc/doas.conf</pre>
+				</div>
+				<h3 class="main__name">26 - Setting Neovim as default text editor</h3>
+				<div class="main__block">
+					<pre>eselect editor set /usr/bin/nvim</pre>
+					<pre>emerge --ask --depclean app-editors/nano</pre>
+				</div>
+				<h3 class="main__name">27 - Installing dotfiles</h3>
+				<div class="main__block">
+					<pre>git clone https://github.com/Mont141414/mont141414.github.io.git mont141414</pre>
+					<pre>cp -rv mont141414/files/dotfiles/.* ~ && rm -rvf mont141414</pre>
+				</div>
+			</div>
+		</main>
+		<footer class="footer">
+			<div class="footer__content">
+				<hr class="footer__divider" />
+			</div>
+		</footer>
+	</body>
+</html>
